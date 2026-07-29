@@ -612,6 +612,19 @@ footer a:hover{color:var(--gold)}
   .models .model{padding:26px 22px}
   .rbtns{justify-content:center}
 }
+/* ── mobile rail: full-card fit on every iPhone (320→430) ── */
+@media(max-width:640px){
+  .rail{padding:10px 18px 26px;scroll-padding-inline:18px;gap:14px}
+  .rcard{flex:0 0 min(84vw,380px)}
+  .rcard[style]{flex-basis:min(84vw,380px) !important}
+  .rail-fade{width:24px;bottom:26px}
+  .pcap{font-size:.85rem;line-height:1.55;padding-inline:2px}
+  .bbar .url{font-size:.58rem;max-width:56vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cert,.ins{padding:22px 20px}
+  .rbtns{justify-content:center;gap:14px;margin-top:10px}
+  .rbtn{width:46px;height:46px}
+}
+
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
@@ -1856,5 +1869,130 @@ const CAL_ORIGIN = 'https://cal.com';
 
 });
 </script>
+
+<!-- ══ Assistente Academy — free Workers AI chatbot ══ -->
+<style>
+#awx-fab{position:fixed;right:18px;bottom:22px;z-index:95;width:58px;height:58px;border-radius:50%;
+  border:0;cursor:pointer;background:var(--gold);color:#2A1B02;box-shadow:0 14px 34px -10px rgba(0,0,0,.55);
+  display:grid;place-items:center;transition:transform .35s var(--ease),box-shadow .35s}
+#awx-fab:hover{transform:translateY(-3px) scale(1.04)}
+#awx-fab svg{width:26px;height:26px}
+#awx-fab .x{display:none;font-size:22px;font-weight:700;line-height:1}
+#awx-fab.open .x{display:block}#awx-fab.open svg{display:none}
+@media(max-width:980px){#awx-fab{bottom:calc(86px + env(safe-area-inset-bottom))}}
+#awx{position:fixed;right:18px;bottom:94px;z-index:94;width:min(392px,calc(100vw - 24px));
+  max-height:min(600px,72dvh);display:none;flex-direction:column;border-radius:22px;overflow:hidden;
+  background:linear-gradient(180deg,rgba(1,58,99,.97),rgba(1,42,74,.985));
+  border:1px solid rgba(169,214,229,.28);box-shadow:0 46px 90px -30px rgba(0,0,0,.75);
+  backdrop-filter:blur(16px)}
+#awx.on{display:flex}
+@media(max-width:980px){#awx{bottom:calc(156px + env(safe-area-inset-bottom))}}
+@media(max-width:480px){#awx{right:12px;left:12px;width:auto}}
+#awx .hd{padding:16px 18px 13px;border-bottom:1px solid rgba(169,214,229,.16);display:flex;gap:12px;align-items:center}
+#awx .hd .dot{width:9px;height:9px;border-radius:50%;background:#7fd6a2;box-shadow:0 0 10px rgba(127,214,162,.8);flex:none}
+#awx .hd b{font-family:var(--serif);font-weight:400;font-size:1.15rem;letter-spacing:.02em}
+#awx .hd small{display:block;font-size:.66rem;color:var(--mut);margin-top:1px}
+#awx .msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin}
+#awx .m{max-width:86%;padding:10px 14px;border-radius:15px;font-size:.86rem;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+#awx .m.u{align-self:flex-end;background:var(--gold);color:#2A1B02;border-bottom-right-radius:5px;font-weight:500}
+#awx .m.a{align-self:flex-start;background:rgba(169,214,229,.1);border:1px solid rgba(169,214,229,.16);
+  color:var(--ivory);border-bottom-left-radius:5px}
+#awx .chips{display:flex;gap:7px;flex-wrap:wrap;padding:0 16px 10px}
+#awx .chip{border:1px solid rgba(169,214,229,.3);background:transparent;color:var(--sky2);border-radius:99px;
+  padding:7px 13px;font-size:.72rem;cursor:pointer;font-family:var(--sans);transition:all .3s}
+#awx .chip:hover{border-color:var(--gold);color:var(--gold)}
+#awx form{display:flex;gap:8px;padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+  border-top:1px solid rgba(169,214,229,.16)}
+#awx input{flex:1;background:rgba(169,214,229,.09);border:1px solid rgba(169,214,229,.22);border-radius:12px;
+  padding:11px 14px;color:var(--ivory);font-family:var(--sans);font-size:.86rem;outline:none;min-width:0}
+#awx input::placeholder{color:var(--dim)}
+#awx input:focus{border-color:var(--gold)}
+#awx .snd{border:0;border-radius:12px;background:var(--gold);color:#2A1B02;width:44px;flex:none;cursor:pointer;
+  display:grid;place-items:center;transition:transform .3s}
+#awx .snd:hover{transform:translateY(-1px)}
+#awx .snd svg{width:17px;height:17px}
+#awx .typing{align-self:flex-start;display:flex;gap:5px;padding:12px 15px}
+#awx .typing i{width:6px;height:6px;border-radius:50%;background:var(--sky2);opacity:.5;animation:awxb 1.1s infinite}
+#awx .typing i:nth-child(2){animation-delay:.18s}#awx .typing i:nth-child(3){animation-delay:.36s}
+@keyframes awxb{40%{opacity:1;transform:translateY(-3px)}}
+#awx .note{font-size:.6rem;color:var(--dim);text-align:center;padding:0 16px 10px}
+</style>
+<button id="awx-fab" aria-label="Assistente Academy" aria-expanded="false">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg>
+  <span class="x">✕</span>
+</button>
+<div id="awx" role="dialog" aria-label="Assistente Academy">
+  <div class="hd"><span class="dot"></span>
+    <div><b>Assistente Academy</b><small id="awx-sub">Pergunte qualquer coisa sobre a plataforma</small></div>
+  </div>
+  <div class="msgs" id="awx-msgs"></div>
+  <div class="chips" id="awx-chips"></div>
+  <div class="note" id="awx-note">Respostas geradas por IA — podem conter imprecisões.</div>
+  <form id="awx-form">
+    <input id="awx-in" autocomplete="off" placeholder="Escreva a sua pergunta…">
+    <button class="snd" type="submit" aria-label="Enviar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    </button>
+  </form>
+</div>
+<script>
+(function(){
+  const API='https://academy-chat.edenrise.workers.dev';
+  const T={
+    pt:{sub:'Pergunte qualquer coisa sobre a plataforma',ph:'Escreva a sua pergunta…',
+        note:'Respostas geradas por IA — podem conter imprecisões.',
+        hi:'Olá! Sou o assistente da Academy Platforms. Posso explicar a plataforma, os planos, as 40 horas obrigatórias ou a prova de evidência. Em que posso ajudar?',
+        err:'Não consegui responder agora. Tente outra vez, ou marque uma chamada de 15 minutos pelo botão no site.',
+        chips:['Quanto custa?','Como tratam as 40 horas?','O que é a prova de evidência?','Posso usar a minha marca?']},
+    en:{sub:'Ask anything about the platform',ph:'Type your question…',
+        note:'AI-generated answers — may contain inaccuracies.',
+        hi:"Hi! I'm the Academy Platforms assistant. I can explain the platform, plans, Portugal's 40 mandatory hours or the evidence chain. How can I help?",
+        err:"I couldn't answer right now. Please try again, or book a 15-minute call via the button on the site.",
+        chips:['How much does it cost?','How are the 40 hours handled?','What is the evidence chain?','Can I use my own brand?']}
+  };
+  const fab=document.getElementById('awx-fab'),box=document.getElementById('awx'),
+        msgs=document.getElementById('awx-msgs'),form=document.getElementById('awx-form'),
+        inp=document.getElementById('awx-in'),chipbox=document.getElementById('awx-chips');
+  let history=[],greeted=false,busy=false;
+  const lang=()=>{const b=document.querySelector('.langsw button.on');return (b&&b.dataset.lang==='en')?'en':'pt';};
+  function applyLang(){const t=T[lang()];
+    document.getElementById('awx-sub').textContent=t.sub;
+    document.getElementById('awx-note').textContent=t.note;
+    inp.placeholder=t.ph;
+    chipbox.innerHTML='';
+    t.chips.forEach(c=>{const b=document.createElement('button');b.type='button';b.className='chip';
+      b.textContent=c;b.onclick=()=>{inp.value=c;form.requestSubmit();};chipbox.appendChild(b);});
+  }
+  function add(role,text){const d=document.createElement('div');d.className='m '+(role==='user'?'u':'a');
+    d.textContent=text;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d;}
+  fab.addEventListener('click',()=>{
+    const open=!box.classList.contains('on');
+    box.classList.toggle('on',open);fab.classList.toggle('open',open);
+    fab.setAttribute('aria-expanded',open);
+    if(open){applyLang();
+      if(!greeted){greeted=true;add('assistant',T[lang()].hi);}
+      inp.focus();}
+  });
+  document.querySelectorAll('.langsw button').forEach(b=>b.addEventListener('click',()=>setTimeout(applyLang,50)));
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const q=inp.value.trim();if(!q||busy)return;
+    inp.value='';add('user',q);history.push({role:'user',content:q});
+    chipbox.style.display='none';busy=true;
+    const tp=document.createElement('div');tp.className='typing';tp.innerHTML='<i></i><i></i><i></i>';
+    msgs.appendChild(tp);msgs.scrollTop=msgs.scrollHeight;
+    try{
+      const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({messages:history})});
+      const j=await r.json();tp.remove();
+      if(j.reply){add('assistant',j.reply);history.push({role:'assistant',content:j.reply});}
+      else add('assistant',T[lang()].err);
+    }catch(_){tp.remove();add('assistant',T[lang()].err);}
+    busy=false;
+  });
+})();
+</script>
+
 </body>
 </html>
