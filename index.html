@@ -1888,20 +1888,19 @@ const CAL_ORIGIN = 'https://cal.com';
   border:0;background:none;cursor:pointer;transition:transform .4s var(--ease)}
 #awx-fab:hover{transform:translateY(-3px) scale(1.05)}
 #awx-fab .orb{position:relative;width:62px;height:62px;border-radius:50%;
-  background:radial-gradient(circle at 50% 38%,rgba(10,52,85,.92),rgba(2,18,33,.96) 72%);
-  border:1.5px solid var(--gold);backdrop-filter:blur(8px);
-  box-shadow:0 14px 34px -10px rgba(0,0,0,.65), 0 0 24px -4px rgba(245,166,35,.45),
-    inset 0 1px 0 rgba(255,255,255,.14);
+  background:linear-gradient(135deg,#CDDCC9 0%,#9FB89C 32%,#AE9455 68%,#DDB268 100%);
+  box-shadow:0 14px 34px -10px rgba(0,0,0,.7), 0 0 26px -6px rgba(221,178,104,.4);
   display:grid;place-items:center;overflow:hidden;transition:box-shadow .4s}
-#awx-fab:hover .orb{box-shadow:0 20px 44px -12px rgba(0,0,0,.7), 0 0 38px -2px rgba(245,166,35,.65),
-  inset 0 1px 0 rgba(255,255,255,.18)}
+#awx-fab .orb::after{content:'';position:absolute;inset:5px;border-radius:50%;
+  background:#12160F;box-shadow:inset 0 2px 8px rgba(0,0,0,.6)}
+#awx-fab:hover .orb{box-shadow:0 20px 44px -12px rgba(0,0,0,.75), 0 0 38px -4px rgba(221,178,104,.6)}
 #awx-fab::before{content:'';position:absolute;inset:0;border-radius:50%;
-  border:1px solid rgba(245,166,35,.5);animation:awxhalo 3.6s ease-out infinite;pointer-events:none}
-@keyframes awxhalo{0%{transform:scale(1);opacity:.6}70%,100%{transform:scale(1.55);opacity:0}}
-#awx-fab .orb svg{width:26px;height:26px;color:var(--gold);position:relative;z-index:1;
-  filter:drop-shadow(0 0 6px rgba(245,166,35,.55))}
+  border:1px solid rgba(221,178,104,.45);animation:awxhalo 3.6s ease-out infinite;pointer-events:none}
+@keyframes awxhalo{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(1.55);opacity:0}}
+#awx-fab .orb svg{width:24px;height:24px;color:#E4C079;position:relative;z-index:1;
+  filter:drop-shadow(0 0 6px rgba(228,192,121,.5))}
 #awx-fab .lbl{display:none}
-#awx-fab .x{display:none;font-size:22px;font-weight:700;line-height:1;color:var(--gold);position:relative;z-index:1}
+#awx-fab .x{display:none;font-size:22px;font-weight:700;line-height:1;color:#E4C079;position:relative;z-index:1}
 #awx-fab.open .x{display:block}#awx-fab.open .orb svg{display:none}
 #awx-fab.open::before{animation:none;opacity:0}
 @media(max-width:980px){#awx-fab{bottom:calc(88px + env(safe-area-inset-bottom))}}
