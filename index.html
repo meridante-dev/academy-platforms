@@ -1455,8 +1455,10 @@ function initHero3D(){
   const field2=field(Math.round(150*PERF),22,-5,CLOUD,.12,.2);
 
   if(mobile){
-    group.position.set(.6,3.1,0); group.rotation.z=.12;
-    group.scale.setScalar(.46); cv.style.opacity='.62';
+    // full-screen presence: the helix rises through the whole viewport,
+    // weighted right so the left-aligned type stays readable
+    group.position.set(.55,.15,0); group.rotation.z=.42;
+    group.scale.set(.8,1.18,.8); cv.style.opacity='.55';
   } else {
     // the cinematic backdrop — centred, filling the frame behind the centred stack
     group.position.set(0,.1,0); group.rotation.z=1.02;
