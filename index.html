@@ -548,7 +548,7 @@ footer a:hover{color:var(--gold)}
 @media(max-width:1100px){
   /* one card at a time, rotating — all panels share a grid cell so the
      container is as tall as the tallest and nothing jumps between slides */
-  .flow3{grid-template-columns:1fr;gap:0;position:relative}
+  .flow3{grid-template-columns:1fr;gap:0;position:relative;touch-action:pan-y}
   .farrow{display:none}
   .fp{grid-area:1/1;max-width:520px;margin:0 auto;width:100%;
     opacity:0;transform:translateX(26px) scale(.985);pointer-events:none;
@@ -1772,13 +1772,25 @@ const CAL_ORIGIN = 'https://cal.com';
       });
       dots.forEach((d,k)=>d.classList.toggle('on',k===i));
     };
-    let held=false;
+    let held=false, sx=0, sy=0, dx=0, swiping=false;
     const stop=()=>{ if(timer){ clearInterval(timer); timer=null; } };
     const start=()=>{ stop(); if(mq.matches && visible && !held) timer=setInterval(()=>show(i+1),3000); };
-    /* press and hold anywhere on the card to freeze it; release to resume */
-    const hold=()=>{ held=true; wrap.classList.add('held'); stop(); };
-    const release=()=>{ if(!held) return; held=false; wrap.classList.remove('held'); start(); };
+    /* press and hold anywhere on the card to freeze it; release to resume.
+       drag horizontally to swipe between the three cards (auto-rotate resumes after) */
+    const pt=e=>e.touches?e.touches[0]:e;
+    const hold=e=>{ held=true; wrap.classList.add('held'); stop();
+      const t=pt(e); sx=t.clientX; sy=t.clientY; dx=0; swiping=false; };
+    const move=e=>{ if(!held||!mq.matches) return; const t=pt(e);
+      dx=t.clientX-sx; const dy=t.clientY-sy;
+      if(!swiping && Math.abs(dx)>12 && Math.abs(dx)>Math.abs(dy)*1.2) swiping=true;
+      if(swiping){ const p=panels[i]; p.style.transition='none';
+        p.style.transform='translateX('+Math.max(-70,Math.min(70,dx*.35))+'px)'; } };
+    const release=()=>{ if(!held) return; held=false; wrap.classList.remove('held');
+      const p=panels[i]; p.style.transition=''; p.style.transform='';
+      if(swiping && mq.matches && Math.abs(dx)>45) show(dx<0 ? i+1 : i-1);
+      swiping=false; dx=0; start(); };
     ['pointerdown','touchstart'].forEach(e=>wrap.addEventListener(e,hold,{passive:true}));
+    ['pointermove','touchmove'].forEach(e=>wrap.addEventListener(e,move,{passive:true}));
     ['pointerup','pointercancel','pointerleave','touchend','touchcancel']
       .forEach(e=>wrap.addEventListener(e,release,{passive:true}));
     addEventListener('blur',release);
@@ -1872,14 +1884,37 @@ const CAL_ORIGIN = 'https://cal.com';
 
 <!-- ══ Assistente Academy — free Workers AI chatbot ══ -->
 <style>
-#awx-fab{position:fixed;right:18px;bottom:22px;z-index:95;width:58px;height:58px;border-radius:50%;
-  border:0;cursor:pointer;background:var(--gold);color:#2A1B02;box-shadow:0 14px 34px -10px rgba(0,0,0,.55);
-  display:grid;place-items:center;transition:transform .35s var(--ease),box-shadow .35s}
-#awx-fab:hover{transform:translateY(-3px) scale(1.04)}
-#awx-fab svg{width:26px;height:26px}
-#awx-fab .x{display:none;font-size:22px;font-weight:700;line-height:1}
-#awx-fab.open .x{display:block}#awx-fab.open svg{display:none}
-@media(max-width:980px){#awx-fab{bottom:calc(86px + env(safe-area-inset-bottom))}}
+#awx-fab{position:fixed;right:18px;bottom:22px;z-index:95;display:flex;align-items:center;gap:12px;
+  border:1px solid rgba(169,214,229,.3);cursor:pointer;border-radius:99px;padding:8px 22px 8px 9px;
+  background:linear-gradient(180deg,rgba(1,58,99,.92),rgba(1,42,74,.96));backdrop-filter:blur(14px);
+  box-shadow:0 18px 44px -14px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.12);
+  transition:transform .4s var(--ease),box-shadow .4s,border-color .4s}
+#awx-fab:hover{transform:translateY(-3px);border-color:rgba(245,166,35,.55);
+  box-shadow:0 26px 54px -16px rgba(0,0,0,.7), 0 0 34px -6px rgba(245,166,35,.35), inset 0 1px 0 rgba(255,255,255,.14)}
+#awx-fab .orb{position:relative;width:46px;height:46px;border-radius:50%;flex:none;
+  background:radial-gradient(circle at 32% 28%,#FFDE9E,#F5A623 52%,#C57F0A 100%);
+  box-shadow:0 6px 18px -4px rgba(245,166,35,.55), inset 0 2px 4px rgba(255,255,255,.55), inset 0 -3px 6px rgba(122,74,4,.45);
+  display:grid;place-items:center;overflow:hidden}
+#awx-fab .orb::before{content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 46%,transparent 60%);
+  transform:translateX(-100%);animation:awxsheen 5.5s var(--ease) infinite}
+@keyframes awxsheen{0%,55%{transform:translateX(-100%)}70%,100%{transform:translateX(100%)}}
+#awx-fab::before{content:'';position:absolute;left:9px;top:8px;width:46px;height:46px;border-radius:50%;
+  border:1px solid rgba(245,166,35,.65);animation:awxhalo 3.2s ease-out infinite;pointer-events:none}
+@keyframes awxhalo{0%{transform:scale(1);opacity:.7}70%,100%{transform:scale(1.65);opacity:0}}
+#awx-fab .orb svg{width:22px;height:22px;color:#2A1B02;position:relative;z-index:1}
+#awx-fab .lbl{font-family:var(--serif);font-style:italic;font-size:1.06rem;letter-spacing:.02em;
+  color:var(--ivory);line-height:1;padding-bottom:2px}
+#awx-fab .lbl small{display:block;font-family:var(--mono);font-style:normal;font-size:.5rem;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+#awx-fab .x{display:none;font-size:20px;font-weight:700;line-height:1;color:#2A1B02;position:relative;z-index:1}
+#awx-fab.open .x{display:block}#awx-fab.open .orb svg{display:none}
+#awx-fab.open::before{animation:none;opacity:0}
+@media(max-width:980px){
+  #awx-fab{bottom:calc(86px + env(safe-area-inset-bottom));padding:7px;gap:0}
+  #awx-fab .lbl{display:none}
+}
+@media(prefers-reduced-motion:reduce){#awx-fab::before,#awx-fab .orb::before{animation:none}}
 #awx{position:fixed;right:18px;bottom:94px;z-index:94;width:min(392px,calc(100vw - 24px));
   max-height:min(600px,72dvh);display:none;flex-direction:column;border-radius:22px;overflow:hidden;
   background:linear-gradient(180deg,rgba(1,58,99,.97),rgba(1,42,74,.985));
@@ -1918,9 +1953,14 @@ const CAL_ORIGIN = 'https://cal.com';
 #awx .note{font-size:.6rem;color:var(--dim);text-align:center;padding:0 16px 10px}
 </style>
 <button id="awx-fab" aria-label="Assistente Academy" aria-expanded="false">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg>
-  <span class="x">✕</span>
+  <span class="orb">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.6l1.8 5.4a2.4 2.4 0 0 0 1.5 1.5l5.4 1.8-5.4 1.8a2.4 2.4 0 0 0-1.5 1.5L12 20l-1.8-5.4a2.4 2.4 0 0 0-1.5-1.5L3.3 11.3l5.4-1.8a2.4 2.4 0 0 0 1.5-1.5L12 2.6z"/>
+      <circle cx="19" cy="4.6" r="1.5"/><circle cx="5" cy="19.4" r="1.2"/>
+    </svg>
+    <span class="x">✕</span>
+  </span>
+  <span class="lbl" id="awx-fablbl">Assistente<small>IA · Academy</small></span>
 </button>
 <div id="awx" role="dialog" aria-label="Assistente Academy">
   <div class="hd"><span class="dot"></span>
@@ -1958,6 +1998,7 @@ const CAL_ORIGIN = 'https://cal.com';
   const lang=()=>{const b=document.querySelector('.langsw button.on');return (b&&b.dataset.lang==='en')?'en':'pt';};
   function applyLang(){const t=T[lang()];
     document.getElementById('awx-sub').textContent=t.sub;
+    const fl=document.getElementById('awx-fablbl');if(fl)fl.innerHTML=(lang()==='en'?'Assistant':'Assistente')+'<small>'+(lang()==='en'?'AI · Academy':'IA · Academy')+'</small>';
     document.getElementById('awx-note').textContent=t.note;
     inp.placeholder=t.ph;
     chipbox.innerHTML='';
