@@ -682,7 +682,7 @@ footer a:hover{color:var(--gold)}
       <div class="tilt" id="tilt">
         <figure class="browser">
           <div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">academy.edenrise.com</span></div>
-          <img src="img/eden-home.jpg" alt="Academia EdenRise — ambiente de aprendizagem com a marca do cliente" fetchpriority="high">
+          <img src="img/eden-home-2026.jpg" alt="Academia EdenRise — a experiência tipo Netflix com a marca do cliente" fetchpriority="high">
         </figure>
         <div class="glare" aria-hidden="true"></div>
       </div>
@@ -1884,36 +1884,28 @@ const CAL_ORIGIN = 'https://cal.com';
 
 <!-- ══ Assistente Academy — free Workers AI chatbot ══ -->
 <style>
-#awx-fab{position:fixed;right:18px;bottom:22px;z-index:95;display:flex;align-items:center;gap:12px;
-  border:1px solid rgba(169,214,229,.3);cursor:pointer;border-radius:99px;padding:8px 22px 8px 9px;
-  background:linear-gradient(180deg,rgba(1,58,99,.92),rgba(1,42,74,.96));backdrop-filter:blur(14px);
-  box-shadow:0 18px 44px -14px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.12);
-  transition:transform .4s var(--ease),box-shadow .4s,border-color .4s}
-#awx-fab:hover{transform:translateY(-3px);border-color:rgba(245,166,35,.55);
-  box-shadow:0 26px 54px -16px rgba(0,0,0,.7), 0 0 34px -6px rgba(245,166,35,.35), inset 0 1px 0 rgba(255,255,255,.14)}
-#awx-fab .orb{position:relative;width:46px;height:46px;border-radius:50%;flex:none;
+#awx-fab{position:fixed;right:20px;bottom:24px;z-index:95;width:62px;height:62px;padding:0;
+  border:0;background:none;cursor:pointer;transition:transform .4s var(--ease)}
+#awx-fab:hover{transform:translateY(-3px) scale(1.05)}
+#awx-fab .orb{position:relative;width:62px;height:62px;border-radius:50%;
   background:radial-gradient(circle at 32% 28%,#FFDE9E,#F5A623 52%,#C57F0A 100%);
-  box-shadow:0 6px 18px -4px rgba(245,166,35,.55), inset 0 2px 4px rgba(255,255,255,.55), inset 0 -3px 6px rgba(122,74,4,.45);
+  border:1px solid rgba(255,255,255,.35);
+  box-shadow:0 16px 36px -10px rgba(0,0,0,.6), 0 6px 22px -4px rgba(245,166,35,.5),
+    inset 0 2px 5px rgba(255,255,255,.55), inset 0 -4px 8px rgba(122,74,4,.45);
   display:grid;place-items:center;overflow:hidden}
 #awx-fab .orb::before{content:'';position:absolute;inset:0;border-radius:50%;
-  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 46%,transparent 60%);
+  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.5) 46%,transparent 60%);
   transform:translateX(-100%);animation:awxsheen 5.5s var(--ease) infinite}
 @keyframes awxsheen{0%,55%{transform:translateX(-100%)}70%,100%{transform:translateX(100%)}}
-#awx-fab::before{content:'';position:absolute;left:9px;top:8px;width:46px;height:46px;border-radius:50%;
-  border:1px solid rgba(245,166,35,.65);animation:awxhalo 3.2s ease-out infinite;pointer-events:none}
-@keyframes awxhalo{0%{transform:scale(1);opacity:.7}70%,100%{transform:scale(1.65);opacity:0}}
-#awx-fab .orb svg{width:22px;height:22px;color:#2A1B02;position:relative;z-index:1}
-#awx-fab .lbl{font-family:var(--serif);font-style:italic;font-size:1.06rem;letter-spacing:.02em;
-  color:var(--ivory);line-height:1;padding-bottom:2px}
-#awx-fab .lbl small{display:block;font-family:var(--mono);font-style:normal;font-size:.5rem;
-  letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-top:4px}
-#awx-fab .x{display:none;font-size:20px;font-weight:700;line-height:1;color:#2A1B02;position:relative;z-index:1}
+#awx-fab::before{content:'';position:absolute;inset:0;border-radius:50%;
+  border:1px solid rgba(245,166,35,.6);animation:awxhalo 3.2s ease-out infinite;pointer-events:none}
+@keyframes awxhalo{0%{transform:scale(1);opacity:.7}70%,100%{transform:scale(1.6);opacity:0}}
+#awx-fab .orb svg{width:26px;height:26px;color:#2A1B02;position:relative;z-index:1}
+#awx-fab .lbl{display:none}
+#awx-fab .x{display:none;font-size:22px;font-weight:700;line-height:1;color:#2A1B02;position:relative;z-index:1}
 #awx-fab.open .x{display:block}#awx-fab.open .orb svg{display:none}
 #awx-fab.open::before{animation:none;opacity:0}
-@media(max-width:980px){
-  #awx-fab{bottom:calc(86px + env(safe-area-inset-bottom));padding:7px;gap:0}
-  #awx-fab .lbl{display:none}
-}
+@media(max-width:980px){#awx-fab{bottom:calc(88px + env(safe-area-inset-bottom))}}
 @media(prefers-reduced-motion:reduce){#awx-fab::before,#awx-fab .orb::before{animation:none}}
 #awx{position:fixed;right:18px;bottom:94px;z-index:94;width:min(392px,calc(100vw - 24px));
   max-height:min(600px,72dvh);display:none;flex-direction:column;border-radius:22px;overflow:hidden;
