@@ -614,6 +614,26 @@ footer a:hover{color:var(--gold)}
 }
 @media(prefers-reduced-motion:reduce){.fplay::before{animation:none}}
 
+/* pricing board */
+.model .bd{padding:26px 26px 30px;display:flex;flex-direction:column;flex:1}
+.model .mt{font-family:var(--sans);font-size:.62rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);line-height:1.5}
+.model .px{font-family:var(--serif);font-size:2.5rem;line-height:1;margin:14px 0 4px;color:var(--ivory)}
+.model .px .from{font-family:var(--sans);font-size:.68rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.model .px .mo{font-family:var(--sans);font-size:1rem;font-weight:500;color:var(--mut);letter-spacing:0}
+.model h3{font-family:var(--serif);font-weight:400;font-size:1.44rem;line-height:1.2;
+  margin:16px 0 8px;color:var(--ivory)}
+.model .md{font-size:.9rem;color:var(--dim);margin-bottom:18px}
+.model ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0 0 20px}
+.model li{position:relative;padding-left:19px;font-size:.9rem;line-height:1.45;color:var(--mut)}
+.model li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;
+  border-radius:50%;background:var(--gold);opacity:.85}
+.model .pxnote{margin-top:auto;font-family:var(--serif);font-style:italic;font-size:1rem;
+  line-height:1.45;color:rgba(234,244,250,.86);background:rgba(169,214,229,.07);
+  border:1px solid rgba(169,214,229,.14);border-radius:14px;padding:16px 18px}
+.model .btn{margin-top:18px;align-self:stretch;justify-content:center}
+
 /* mobile */
 @media(max-width:980px){
   .mbar{display:block}
@@ -989,57 +1009,80 @@ footer a:hover{color:var(--gold)}
   <div class="wrap">
     <div class="shead" data-rv>
       <span class="eyebrow" data-i="md_eb">Planos</span>
-      <h2 data-i="md_h2">Preço simples.<br><em>Todos incluídos.</em></h2>
-      <p data-i="md_p">Um valor fixo por mês, por empresa. Colaboradores ilimitados — formar toda a gente não devia custar mais.</p>
+      <h2 data-i="md_h2">Três formas de começar.<br><em>Escolha quanto fazemos por si.</em></h2>
+      <p data-i="md_p">Um valor de instalação, depois uma mensalidade. Cursos ilimitados dentro do uso justo.</p>
     </div>
     <div class="models">
+
       <div class="model" data-rv>
         <figure class="mimg"><img src="img/academy-cover.jpg" alt="" loading="lazy"></figure>
-        <div class="mt">Foundation</div>
-        <h3 data-i="m1_h">Pronta a usar</h3>
-        <p class="md" data-i="m1_d">A academia com a sua marca, pronta a operar.</p>
-        <ul>
-          <li data-i="m1_l1"><b>Plataforma completa</b> com a sua marca e domínio</li>
-          <li data-i="m1_l2">Conformidade PT/UE: 40h do Art. 131.º do Código do Trabalho, Relatório Único, Art. 4.º do Regulamento de IA</li>
-          <li data-i="m1_l3">Escada de evidência completa + verificador público</li>
-          <li data-i="m1_l4">Utilizadores ilimitados · dados na UE</li>
-        </ul>
-        <div class="px">€399<small> /mês por instância</small></div>
-        <p class="pxn" data-i="m1_n">+ €1.500 setup · anual = 2 meses grátis · <b>Programa fundador: 3 vagas a €199/mês, fixado 12 meses</b> — em contrapartida, caso de estudo com nome e chamada mensal de feedback.</p>
-        <a class="btn btn-ghost" href="#contacto" data-i="m1_c">Falar connosco</a>
+        <div class="bd">
+          <div class="mt" data-i="m1_t">01 · Plataforma Academia Base</div>
+          <div class="px"><span class="from" data-i="px_from">Desde</span> <span data-i="m1_px">€400</span><small class="mo" data-i="m1_mo"> · €70/mês</small></div>
+          <h3 data-i="m1_h">A sua academia com marca própria e apresentador IA — pronta a usar.</h3>
+          <p class="md" data-i="m1_d">A sua equipa cria e carrega o conteúdo.</p>
+          <ul>
+            <li data-i="m1_l1">Plataforma de academia com marca própria</li>
+            <li data-i="m1_l2">Estrutura de aprendizagem à medida</li>
+            <li data-i="m1_l3">Cursos ilimitados dentro do uso justo</li>
+            <li data-i="m1_l4">Carregamento de vídeo, PDF e documentos</li>
+            <li data-i="m1_l5">Questionários e certificados</li>
+            <li data-i="m1_l6">Acompanhamento do progresso dos formandos</li>
+            <li data-i="m1_l7">1 avatar IA · 1 voz IA</li>
+            <li data-i="m1_l8">Acesso ao avatar / voz entregue</li>
+            <li data-i="m1_l9">Starter Academy Care incluído</li>
+          </ul>
+          <p class="pxnote" data-i="m1_n">Nós construímos a academia e o apresentador IA. Você traz o conteúdo.</p>
+          <a class="btn btn-ghost" href="#contacto" data-i="m1_c">Falar connosco</a>
+        </div>
       </div>
+
       <div class="model sig" data-rv>
         <figure class="mimg"><img src="img/eden-library-2026.jpg" alt="" loading="lazy"></figure>
-        <div class="mt">Signature</div>
-        <h3 data-i="m2_h">Nós criamos os cursos</h3>
-        <p class="md" data-i="m2_d">A infraestrutura, mais a biblioteca inicial produzida convosco.</p>
-        <ul>
-          <li data-i="m2_l1">Tudo o que está em <b>Foundation</b></li>
-          <li data-i="m2_l2">Biblioteca inicial de programas produzida a partir do vosso conhecimento</li>
-          <li data-i="m2_l3">Avatar e voz de marca para conteúdos de vídeo</li>
-          <li data-i="m2_l4">Percursos de onboarding desenhados connosco</li>
-        </ul>
-        <div class="px" data-i="m2_x">Sob consulta</div>
-        <p class="pxn" data-i="m2_n">Âmbito definido na sessão de estratégia.</p>
-        <a class="btn btn-gold" href="#contacto" data-book data-i="m2_c">Marcar sessão</a>
+        <div class="bd">
+          <div class="mt" data-i="m2_t">02 · Standard + Lançamento IA</div>
+          <div class="px"><span class="from" data-i="px_from">Desde</span> <span data-i="m2_px">€800</span><small class="mo" data-i="m2_mo"> · €190/mês</small></div>
+          <h3 data-i="m2_h">Comece com as suas primeiras lições em IA já produzidas.</h3>
+          <p class="md" data-i="m2_d">Criamos o primeiro lote e formamos a sua equipa.</p>
+          <ul>
+            <li data-i="m2_l1">Tudo o que está no Base</li>
+            <li data-i="m2_l2">5 lições de lançamento apresentadas por IA</li>
+            <li data-i="m2_l3">Até 3 min cada · 15 min no total</li>
+            <li data-i="m2_l4">Agente gerador de guiões</li>
+            <li data-i="m2_l5">Acolhimento da equipa</li>
+            <li data-i="m2_l6">Formação para criar lições futuras</li>
+            <li data-i="m2_l7">Atualização trimestral e apoio</li>
+            <li data-i="m2_l8">Growth Hosting incluído</li>
+          </ul>
+          <p class="pxnote" data-i="m2_n">A academia, o apresentador IA, as primeiras lições e o sistema para continuar a criar.</p>
+          <a class="btn btn-gold" href="#contacto" data-book data-i="m2_c">Marcar sessão</a>
+        </div>
       </div>
+
       <div class="model" data-rv>
         <figure class="mimg"><img src="img/belong-home-2026.jpg" alt="" loading="lazy"></figure>
-        <div class="mt">Enterprise</div>
-        <h3 data-i="m3_h">Nós tratamos de tudo</h3>
-        <p class="md" data-i="m3_d">Produção completa, conteúdo contínuo e gestão estratégica.</p>
-        <ul>
-          <li data-i="m3_l1">Tudo o que está em <b>Signature</b></li>
-          <li data-i="m3_l2">Produção contínua de programas e atualização de standards</li>
-          <li data-i="m3_l3">Relatórios executivos de conclusão e competência</li>
-          <li data-i="m3_l4">Gestão estratégica da academia como serviço</li>
-        </ul>
-        <div class="px" data-i="m3_x">Sob consulta</div>
-        <p class="pxn" data-i="m3_n">Para organizações com operação de formação contínua.</p>
-        <a class="btn btn-ghost" href="#contacto" data-i="m3_c">Falar connosco</a>
+        <div class="bd">
+          <div class="mt" data-i="m3_t">03 · Departamento Academia Completo</div>
+          <div class="px"><span class="from" data-i="px_from">Desde</span> <span data-i="m3_px">€1.200</span><small class="mo" data-i="m3_mo"> · €490/mês</small></div>
+          <h3 data-i="m3_h">O seu departamento de vídeo IA — sem ter de o contratar.</h3>
+          <p class="md" data-i="m3_d">Planeamos, produzimos, carregamos e gerimos mensalmente.</p>
+          <ul>
+            <li data-i="m3_l1">Tudo o que está no Standard</li>
+            <li data-i="m3_l2">Lançamento completo de curso (âmbito acordado)</li>
+            <li data-i="m3_l3">Apoio mensal de conteúdo</li>
+            <li data-i="m3_l4">Até 2 vídeos IA curtos / mês</li>
+            <li data-i="m3_l5">Até 6 min finalizados / mês</li>
+            <li data-i="m3_l6">Edição e carregamento</li>
+            <li data-i="m3_l7">Gestão da plataforma</li>
+            <li data-i="m3_l8">Gestor dedicado</li>
+            <li data-i="m3_l9">Academy Hosting incluído</li>
+          </ul>
+          <p class="pxnote" data-i="m3_n">Ajudamos a operar e a fazer crescer a academia consigo.</p>
+          <a class="btn btn-ghost" href="#contacto" data-i="m3_c">Falar connosco</a>
+        </div>
       </div>
+
     </div>
-  </div>
 </section>
 
 <!-- ================= A PROVA ================= -->
@@ -1226,28 +1269,6 @@ sv6_h:"Certify", sv6_p:"Certificates issue themselves. The 40 hours are on recor
 uc_eb:"Use cases", uc_h2:"One platform.<br><em>Every kind of training.</em>",
 uc1:"Employee onboarding", uc2:"Compliance and standards", uc3:"Leadership development", uc4:"Operational training",
 uc5:"Customer education", uc6:"Partner academies", uc7:"Franchise training", uc8:"Multilingual workforces", uc_p:"From day one to the mandatory 40 hours — one place for everything your team needs to learn.",
-md_eb:"Plans",
-md_h2:"Simple pricing.<br><em>Everyone included.</em>",
-md_p:"One flat monthly fee per company. Unlimited employees — training everyone shouldn't cost more.",
-m1_h:"Ready to run", m1_d:"Your branded academy, ready to operate.",
-m1_l1:"<b>Complete platform</b> in your brand and domain",
-m1_l2:"PT/EU compliance: the Labour Code Art. 131 40 hours, Relatório Único, AI Act Art. 4",
-m1_l3:"Full evidence ladder + public verifier",
-m1_l4:"Unlimited users · EU data",
-m1_n:"+ €1,500 setup · annual = 2 months free · <b>Founding programme: 3 slots at €199/month, locked 12 months</b> — in return, a named case study and a monthly feedback call.",
-m1_c:"Talk to us",
-m2_h:"We make the courses", m2_d:"The infrastructure, plus the initial library produced with you.",
-m2_l1:"Everything in <b>Foundation</b>",
-m2_l2:"Initial programme library produced from your knowledge",
-m2_l3:"Brand avatar and voice for video content",
-m2_l4:"Onboarding paths designed with us",
-m2_x:"On request", m2_n:"Scope defined in the strategy session.", m2_c:"Book a session",
-m3_h:"We run it for you", m3_d:"Complete production, ongoing content and strategic management.",
-m3_l1:"Everything in <b>Signature</b>",
-m3_l2:"Ongoing programme production and standards updates",
-m3_l3:"Executive completion and competency reporting",
-m3_l4:"Strategic academy management as a service",
-m3_x:"On request", m3_n:"For organisations with a continuous training operation.", m3_c:"Talk to us",
 pv_eb:"The proof",
 pv_h2:"Training an auditor can <em>verify alone</em>",
 pv_p:"Every lesson, quiz and certificate is recorded permanently. If an inspector asks, the proof is there — <b>provably not back-dated</b> and checkable by them, <b>without depending on our software</b>.",
@@ -1277,6 +1298,7 @@ ft_tag:"Your expertise. Structured, delivered and scaled.",
 ft_desc:"Corporate Academy Design &amp; Learning Technology",
 ft_pr:"No tracking cookies, no third-party analytics — that's why there's no banner.",
 fl_eb:"See it in action", fl_h2:"Keep your business running—<br><em>no matter who's on shift.</em>", fl_p:"Give every employee instant answers from your company's own knowledge, so they can work confidently from day one.", fl_cap:"When your team asks questions, Academy delivers the right answer instantly—and reveals the recurring challenges leaders need to solve.",
+md_eb:"Plans", md_h2:"Three ways to start.<br><em>Choose how much we do for you.</em>", md_p:"One setup fee, then a monthly rate. Unlimited courses within fair use.", px_from:"From", m1_px:"€400", m1_mo:" · €70/mo", m2_px:"€800", m2_mo:" · €190/mo", m3_px:"€1,200", m3_mo:" · €490/mo", m1_t:"01 · Base Academy Platform", m1_h:"Your own branded academy with an AI presenter — ready to use.", m1_d:"Your team creates and uploads the content.", m1_l1:"Branded academy platform", m1_l2:"Learning structure built to fit", m1_l3:"Unlimited courses within fair use", m1_l4:"Video, PDF and document upload", m1_l5:"Quizzes and certificates", m1_l6:"Learner progress tracking", m1_l7:"1 AI avatar · 1 AI voice", m1_l8:"Avatar / voice access delivered", m1_l9:"Starter Academy Care included", m1_n:"We build the academy and the AI presenter. You bring the content.", m1_c:"Talk to us", m2_t:"02 · Standard + AI Launch", m2_h:"Start with your first AI-presented lessons already produced.", m2_d:"We produce the first batch and train your team.", m2_l1:"Everything in Base", m2_l2:"5 launch lessons presented by AI", m2_l3:"Up to 3 min each · 15 min in total", m2_l4:"Script-generating agent", m2_l5:"Team onboarding", m2_l6:"Training to create future lessons", m2_l7:"Quarterly update and support", m2_l8:"Growth Hosting included", m2_n:"The academy, the AI presenter, the first lessons, and the system to keep creating.", m2_c:"Book a session", m3_t:"03 · Complete Academy Department", m3_h:"Your AI video department — without having to hire one.", m3_d:"We plan, produce, upload and manage it monthly.", m3_l1:"Everything in Standard", m3_l2:"Full course launch (agreed scope)", m3_l3:"Monthly content support", m3_l4:"Up to 2 short AI videos / month", m3_l5:"Up to 6 finished min / month", m3_l6:"Editing and uploading", m3_l7:"Platform management", m3_l8:"Dedicated manager", m3_l9:"Academy Hosting included", m3_n:"We help you operate and grow the academy.", m3_c:"Talk to us",
 ft_l1:"Privacy Policy (platform)", ft_l2:"Public verifier", ft_l3:"The proof",
 ft_l4:"Terms & Conditions", ft_l5:"Support & SLA",
 ft_imp:'© <span class="ph">[ENTITY]</span> · sold through Meridante · <span class="ph">[ENTIDADE]</span> · NIPC <span class="ph">[NIPC]</span> · <span class="ph">[morada]</span> · <span class="ph">[email]</span><br>This site is general information and does not constitute legal advice. The platform produces supporting documentation for the employer\'s obligations; certificates issued are internal training certificates.',
